@@ -1,0 +1,17 @@
+{
+  "name": "luminacv",
+  "version": "1.0.0",
+  "description": "LuminaCV - Professional CV Builder and PDF Generator",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve ."
+  },
+  "keywords": [
+    "cv",
+    "resume",
+    "pdf-generator",
+    "html-css-js"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

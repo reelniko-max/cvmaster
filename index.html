@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuminaCV - Professional CV Builder</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-file-invoice"></i>
+                </div>
+                <h1>Lumina<span>CV</span></h1>
+            </div>
+            <div class="header-actions">
+                <button id="btn-load-sample" class="btn btn-secondary">
+                    <i class="fa-solid fa-database"></i> Load Sample Data
+                </button>
+                <button id="btn-reset" class="btn btn-danger">
+                    <i class="fa-solid fa-trash-can"></i> Clear All
+                </button>
+                <button id="btn-print" class="btn btn-primary">
+                    <i class="fa-solid fa-download"></i> Download PDF
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="app-workspace">
+            <!-- Left Panel: Editor Form -->
+            <section class="editor-panel">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-personal">
+                        <i class="fa-solid fa-user"></i> <span>Personal</span>
+                    </button>
+                    <button class="tab-btn" data-tab="tab-experience">
+                        <i class="fa-solid fa-briefcase"></i> <span>Experience</span>
+                    </button>
+                    <button class="tab-btn" data-tab="tab-education">
+                        <i class="fa-solid fa-graduation-cap"></i> <span>Education</span>
+                    </button>
+                    <button class="tab-btn" data-tab="tab-skills">
+                        <i class="fa-solid fa-bolt"></i> <span>Skills</span>
+                    </button>
+                    <button class="tab-btn" data-tab="tab-projects">
+                        <i class="fa-solid fa-code"></i> <span>Projects</span>
+                    </button>
+                    <button class="tab-btn" data-tab="tab-customize">
+                        <i class="fa-solid fa-sliders"></i> <span>Design</span>
+                    </button>
+                </div>
+
+                <div class="tab-content-container">
+                    <!-- Personal Info Tab -->
+                    <div class="tab-content active" id="tab-personal">
+                        <h2>Personal Details</h2>
+                        <p class="tab-subtitle">Introduce yourself to potential employers</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group col-span-2">
+                                <label for="input-fullname">Full Name</label>
+                                <input type="text" id="input-fullname" placeholder="John Doe">
+                            </div>
+                            <div class="form-group col-span-2">
+                                <label for="input-jobtitle">Professional Title</label>
+                                <input type="text" id="input-jobtitle" placeholder="Senior Frontend Developer">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-email">Email Address</label>
+                                <input type="email" id="input-email" placeholder="john.doe@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-phone">Phone Number</label>
+                                <input type="text" id="input-phone" placeholder="+1 (555) 019-2834">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-website">Website / Portfolio</label>
+                                <input type="url" id="input-website" placeholder="johndoe.dev">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-location">Location</label>
+                                <input type="text" id="input-location" placeholder="New York, USA">
+                            </div>
+                            <div class="form-group col-span-2">
+                                <label for="input-avatar">Profile Image URL (Optional)</label>
+                                <div class="avatar-input-wrapper">
+                                    <input type="url" id="input-avatar" placeholder="https://images.unsplash.com/... or leave blank">
+                                    <button type="button" id="btn-avatar-demo" class="btn btn-small">Demo Pic</button>
+                                </div>
+                            </div>
+                            <div class="form-group col-span-2">
+                                <label for="input-summary">Professional Summary</label>
+                                <textarea id="input-summary" rows="5" placeholder="A passionate and detail-oriented developer with 5+ years of experience building responsive web applications..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Work Experience Tab -->
+                    <div class="tab-content" id="tab-experience">
+                        <div class="section-header">
+                            <h2>Work Experience</h2>
+                            <button class="btn btn-secondary btn-small" id="btn-add-experience">
+                                <i class="fa-solid fa-plus"></i> Add Job
+                            </button>
+                        </div>
+                        <p class="tab-subtitle">Outline your work history (start with the most recent)</p>
+                        
+                        <div id="experience-list" class="repeater-list">
+                            <!-- Dynamically added experience items will go here -->
+                        </div>
+                    </div>
+
+                    <!-- Education Tab -->
+                    <div class="tab-content" id="tab-education">
+                        <div class="section-header">
+                            <h2>Education</h2>
+                            <button class="btn btn-secondary btn-small" id="btn-add-education">
+                                <i class="fa-solid fa-plus"></i> Add Degree
+                            </button>
+                        </div>
+                        <p class="tab-subtitle">List your academic background and qualifications</p>
+                        
+                        <div id="education-list" class="repeater-list">
+                            <!-- Dynamically added education items will go here -->
+                        </div>
+                    </div>
+
+                    <!-- Skills & Languages Tab -->
+                    <div class="tab-content" id="tab-skills">
+                        <h2>Skills & Languages</h2>
+                        <p class="tab-subtitle">Highlight your competencies and linguistic abilities</p>
+                        
+                        <div class="skills-split-grid">
+                            <!-- Skills Section -->
+                            <div class="skills-card">
+                                <div class="card-header">
+                                    <h3>Professional Skills</h3>
+                                    <button class="btn btn-secondary btn-small" id="btn-add-skill">
+                                        <i class="fa-solid fa-plus"></i> Add
+                                    </button>
+                                </div>
+                                <div id="skills-list" class="tag-repeater-list">
+                                    <!-- Dynamically added skills will go here -->
+                                </div>
+                            </div>
+
+                            <!-- Languages Section -->
+                            <div class="skills-card">
+                                <div class="card-header">
+                                    <h3>Languages</h3>
+                                    <button class="btn btn-secondary btn-small" id="btn-add-language">
+                                        <i class="fa-solid fa-plus"></i> Add
+                                    </button>
+                                </div>
+                                <div id="languages-list" class="tag-repeater-list">
+                                    <!-- Dynamically added languages will go here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects & Certifications Tab -->
+                    <div class="tab-content" id="tab-projects">
+                        <div class="section-header">
+                            <h2>Projects & Accomplishments</h2>
+                            <button class="btn btn-secondary btn-small" id="btn-add-project">
+                                <i class="fa-solid fa-plus"></i> Add Project
+                            </button>
+                        </div>
+                        <p class="tab-subtitle">Showcase your side projects or portfolio accomplishments</p>
+                        
+                        <div id="projects-list" class="repeater-list">
+                            <!-- Dynamically added projects will go here -->
+                        </div>
+                    </div>
+
+                    <!-- Customize Design Tab -->
+                    <div class="tab-content" id="tab-customize">
+                        <h2>Design Settings</h2>
+                        <p class="tab-subtitle">Customize the presentation, layout, and styling of your CV</p>
+                        
+                        <div class="customize-grid">
+                            <!-- Layout Template Select -->
+                            <div class="form-group">
+                                <label for="select-template">CV Template Style</label>
+                                <select id="select-template">
+                                    <option value="modern">Modern Minimalist (Single Column)</option>
+                                    <option value="split-sidebar" selected>Creative Split (Sidebar Left)</option>
+                                    <option value="executive">Executive Classic (Header Top)</option>
+                                    <option value="minimal">Ultra Clean (No Icons)</option>
+                                </select>
+                            </div>
+
+                            <!-- Font Select -->
+                            <div class="form-group">
+                                <label for="select-font">Typography Family</label>
+                                <select id="select-font">
+                                    <option value="font-inter">Inter (Modern & Professional)</option>
+                                    <option value="font-outfit" selected>Outfit (Clean & High-Tech)</option>
+                                    <option value="font-playfair">Playfair Display (Elegant & Classic)</option>
+                                    <option value="font-mono">Roboto Mono (Developer & Technical)</option>
+                                </select>
+                            </div>
+
+                            <!-- Primary Accent Color Picker -->
+                            <div class="form-group">
+                                <label>Accent Theme Color</label>
+                                <div class="color-picker-group">
+                                    <button class="color-swatch active" style="background-color: #0ea5e9;" data-color="#0ea5e9" title="Sky Blue"></button>
+                                    <button class="color-swatch" style="background-color: #10b981;" data-color="#10b981" title="Mint Green"></button>
+                                    <button class="color-swatch" style="background-color: #0f172a;" data-color="#0f172a" title="Midnight Navy"></button>
+                                    <button class="color-swatch" style="background-color: #f43f5e;" data-color="#f43f5e" title="Rose Red"></button>
+                                    <button class="color-swatch" style="background-color: #8b5cf6;" data-color="#8b5cf6" title="Amethyst Purple"></button>
+                                    <button class="color-swatch" style="background-color: #f97316;" data-color="#f97316" title="Coral Orange"></button>
+                                    <input type="color" id="custom-color-picker" value="#0ea5e9" title="Custom Color">
+                                </div>
+                            </div>
+
+                            <!-- Sidebar Theme Color (For Split Template) -->
+                            <div class="form-group">
+                                <label>Sidebar Background Style</label>
+                                <select id="select-sidebar-bg">
+                                    <option value="dark" selected>Sleek Dark (#1e293b)</option>
+                                    <option value="light">Crisp Light (#f8fafc)</option>
+                                    <option value="accent">Theme Accent Gradient</option>
+                                </select>
+                            </div>
+
+                            <!-- Page Margins -->
+                            <div class="form-group">
+                                <label for="range-margins">Page Padding</label>
+                                <div class="range-wrapper">
+                                    <input type="range" id="range-margins" min="15" max="40" value="25">
+                                    <span id="margins-val">25px</span>
+                                </div>
+                            </div>
+
+                            <!-- Section Ordering Options -->
+                            <div class="form-group col-span-2">
+                                <label>Toggle Visible Sections</label>
+                                <div class="toggle-grid">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="chk-show-avatar" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Show Profile Photo</span>
+                                    </label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="chk-show-skills-bar" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Show Skills Level Indicators</span>
+                                    </label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="chk-show-projects" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Include Projects Section</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Live CV Preview -->
+            <section class="preview-panel">
+                <div class="preview-controls">
+                    <div class="preview-title">
+                        <i class="fa-regular fa-eye"></i> Live CV A4 Preview
+                    </div>
+                    <div class="page-indicator">
+                        <span>A4 PDF Canvas</span>
+                    </div>
+                </div>
+                
+                <div class="preview-viewport">
+                    <!-- Interactive A4 Page Mockup -->
+                    <div id="cv-preview-page" class="cv-page template-split-sidebar font-outfit" style="--accent-color: #0ea5e9; --page-padding: 25px;">
+                        <!-- Content will be injected dynamically via JS -->
+                        <div class="cv-split-container">
+                            <!-- Sidebar Left -->
+                            <aside class="cv-sidebar sidebar-style-dark">
+                                <div class="cv-sidebar-header">
+                                    <div class="cv-avatar-container" id="cv-avatar-box">
+                                        <img id="cv-avatar" src="" alt="Avatar Placeholder">
+                                    </div>
+                                    <h1 id="cv-name">John Doe</h1>
+                                    <p id="cv-title">Professional Title</p>
+                                </div>
+
+                                <div class="cv-sidebar-section">
+                                    <h3 class="sidebar-sec-title">Contact</h3>
+                                    <ul class="cv-contact-list">
+                                        <li id="cv-contact-email-item">
+                                            <i class="fa-solid fa-envelope"></i>
+                                            <span id="cv-email">email@example.com</span>
+                                        </li>
+                                        <li id="cv-contact-phone-item">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <span id="cv-phone">+1 234 567 890</span>
+                                        </li>
+                                        <li id="cv-contact-website-item">
+                                            <i class="fa-solid fa-globe"></i>
+                                            <span id="cv-website">website.com</span>
+                                        </li>
+                                        <li id="cv-contact-location-item">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            <span id="cv-location">Location, City</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="cv-sidebar-section" id="cv-skills-section">
+                                    <h3 class="sidebar-sec-title">Skills</h3>
+                                    <div id="cv-skills-container" class="cv-skills-grid">
+                                        <!-- Inject skills -->
+                                    </div>
+                                </div>
+
+                                <div class="cv-sidebar-section" id="cv-languages-section">
+                                    <h3 class="sidebar-sec-title">Languages</h3>
+                                    <div id="cv-languages-container" class="cv-languages-list">
+                                        <!-- Inject languages -->
+                                    </div>
+                                </div>
+                            </aside>
+
+                            <!-- Main Right Content -->
+                            <div class="cv-main-content">
+                                <section class="cv-section" id="cv-summary-section">
+                                    <h2 class="cv-section-title">Professional Summary</h2>
+                                    <p id="cv-summary">Professional summary goes here...</p>
+                                </section>
+
+                                <section class="cv-section" id="cv-experience-section">
+                                    <h2 class="cv-section-title">Work Experience</h2>
+                                    <div id="cv-experience-container" class="timeline-container">
+                                        <!-- Inject experiences -->
+                                    </div>
+                                </section>
+
+                                <section class="cv-section" id="cv-education-section">
+                                    <h2 class="cv-section-title">Education</h2>
+                                    <div id="cv-education-container" class="timeline-container">
+                                        <!-- Inject education -->
+                                    </div>
+                                </section>
+
+                                <section class="cv-section" id="cv-projects-section">
+                                    <h2 class="cv-section-title">Projects</h2>
+                                    <div id="cv-projects-container" class="projects-grid">
+                                        <!-- Inject projects -->
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Designed with <i class="fa-solid fa-heart" style="color: #4ade80;"></i> using Sky Blue and Light Green Theme.</p>
+        </footer>
+    </div>
+
+    <!-- Script file -->
+    <script src="app.js"></script>
+</body>
+</html>

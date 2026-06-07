@@ -1,0 +1,1507 @@
+/* --------------------------------------------------
+   LuminaCV Design System & Stylesheet
+   -------------------------------------------------- */
+
+/* Global Reset & Core Styling */
+:root {
+    /* Dashboard Theme (Dark Slate + Glassmorphism) */
+    --bg-dark: #090d16;
+    --bg-card: rgba(15, 23, 42, 0.65);
+    --bg-card-hover: rgba(30, 41, 59, 0.75);
+    --border-color: rgba(255, 255, 255, 0.07);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    /* Branding Accent Colors */
+    --accent-sky: #0ea5e9;
+    --accent-green: #10b981;
+    --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    --gradient-glow: 0 0 20px rgba(14, 165, 233, 0.25);
+    
+    /* Fonts */
+    --font-sans: 'Inter', sans-serif;
+    
+    /* CV Page Defaults (Overridden dynamically via styles) */
+    --cv-accent: #0ea5e9;
+    --cv-text-dark: #1e293b;
+    --cv-text-light: #64748b;
+    --cv-bg-light: #ffffff;
+    --cv-sidebar-dark-bg: #1e293b;
+    --cv-sidebar-light-bg: #f8fafc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Background Animated Shapes */
+.bg-shape {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, var(--accent-sky) 0%, transparent 70%);
+    animation: float 25s infinite ease-in-out alternate;
+}
+
+.shape-2 {
+    bottom: -15%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
+    animation: float 30s infinite ease-in-out alternate-reverse;
+}
+
+.shape-3 {
+    top: 40%;
+    left: 45%;
+    width: 30vw;
+    height: 30vw;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, transparent 75%);
+    animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(4vw, -5vh) scale(1.1);
+    }
+    100% {
+        transform: translate(-2vw, 3vh) scale(0.95);
+    }
+}
+
+/* App Container Layout */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    background: rgba(9, 13, 22, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--gradient-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: rotate(45deg);
+    transition: 0.5s;
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translate(-100%, -100%) rotate(45deg); }
+    100% { transform: translate(100%, 100%) rotate(45deg); }
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+.logo h1 span {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    font-family: var(--font-sans);
+}
+
+.btn-primary {
+    background: var(--gradient-accent);
+    color: white;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.25);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.45);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
+/* App Workspace Split Panel */
+.app-workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Left Panel: Editor */
+.editor-panel {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    background: rgba(9, 13, 22, 0.4);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+/* Tabs Navigation */
+.tabs-nav {
+    display: flex;
+    overflow-x: auto;
+    background: rgba(15, 23, 42, 0.4);
+    border-bottom: 1px solid var(--border-color);
+    scrollbar-width: none; /* Firefox */
+}
+
+.tabs-nav::-webkit-scrollbar {
+    display: none; /* Safari & Chrome */
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+}
+
+.tab-btn i {
+    font-size: 1rem;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.tab-btn.active {
+    color: var(--accent-sky);
+    border-bottom-color: var(--accent-sky);
+    background: rgba(14, 165, 233, 0.05);
+}
+
+/* Tab Content Container */
+.tab-content-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.tab-content-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tab-content-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content h2 {
+    font-size: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.tab-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+}
+
+/* Form Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.col-span-2 {
+    grid-column: span 2;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-sky);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.avatar-input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.avatar-input-wrapper input {
+    flex: 1;
+}
+
+/* Custom Color Picker Swatches */
+.color-picker-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--bg-card);
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.color-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.15);
+}
+
+.color-swatch.active {
+    border-color: white;
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+input[type="color"]#custom-color-picker {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: transparent;
+    overflow: hidden;
+}
+
+input[type="color"]#custom-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]#custom-color-picker::-webkit-color-swatch {
+    border: 2px solid transparent;
+    border-radius: 50%;
+}
+
+/* Toggle Switch Styling */
+.toggle-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 34px;
+    transition: background-color 0.3s;
+}
+
+.toggle-slider::before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: var(--accent-green);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(22px);
+}
+
+.toggle-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Range input styling */
+.range-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-card);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.range-wrapper input[type="range"] {
+    flex: 1;
+    accent-color: var(--accent-sky);
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+#margins-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-sky);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Repeater Items (Work Experience, Education, Projects) */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.repeater-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.repeater-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(14, 165, 233, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.card-remove-btn {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.card-remove-btn:hover {
+    color: #f87171;
+}
+
+.repeater-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent-sky);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Tag Repeater for Skills & Languages */
+.skills-split-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.skills-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.skills-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.skills-card h3 {
+    font-size: 1.05rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+}
+
+.tag-repeater-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tag-repeater-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    animation: slideIn 0.2s ease forwards;
+}
+
+.tag-repeater-item input[type="text"] {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+}
+
+.tag-repeater-item input[type="range"] {
+    width: 100px;
+    accent-color: var(--accent-green);
+    cursor: pointer;
+}
+
+.tag-remove-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+
+.tag-remove-btn:hover {
+    color: #f87171;
+}
+
+
+/* Right Panel: Live CV Preview */
+.preview-panel {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    background: #0f172a; /* Flat darker blue background for high contrast */
+    position: relative;
+    overflow: hidden;
+}
+
+.preview-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(15, 23, 42, 0.8);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.preview-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-indicator {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.preview-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.preview-viewport::-webkit-scrollbar {
+    width: 6px;
+}
+
+.preview-viewport::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+
+/* --------------------------------------------------
+   CV Template Presentation Styles (Rendered Canvas)
+   -------------------------------------------------- */
+
+.cv-page {
+    width: 100%;
+    max-width: 800px;
+    min-height: 1130px; /* A4 aspect ratio height based on width */
+    background-color: var(--cv-bg-light);
+    color: var(--cv-text-dark);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    padding: var(--page-padding);
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+/* Typography styles applied dynamically to CV Page */
+.cv-page.font-inter { font-family: 'Inter', sans-serif; }
+.cv-page.font-outfit { font-family: 'Outfit', sans-serif; }
+.cv-page.font-playfair { font-family: 'Playfair Display', serif; }
+.cv-page.font-mono { font-family: 'Roboto Mono', monospace; }
+
+/* Sub-typography overrides for headings */
+.cv-page.font-playfair h1,
+.cv-page.font-playfair h2,
+.cv-page.font-playfair h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* CV Layout Common Elements */
+.cv-section {
+    margin-bottom: 1.5rem;
+}
+
+.cv-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--cv-accent);
+    border-bottom: 2px solid var(--cv-accent);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cv-item {
+    margin-bottom: 1rem;
+}
+
+.cv-item:last-child {
+    margin-bottom: 0;
+}
+
+.cv-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 0.25rem;
+}
+
+.cv-item-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.cv-item-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.cv-item-date {
+    font-size: 0.85rem;
+    color: var(--cv-text-light);
+    font-weight: 500;
+}
+
+.cv-item-desc {
+    color: var(--cv-text-light);
+    font-size: 0.9rem;
+    white-space: pre-line;
+}
+
+/* Timeline Layout (For work & education sections) */
+.timeline-container {
+    position: relative;
+    border-left: 2px solid #e2e8f0;
+    padding-left: 1.25rem;
+    margin-left: 0.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cv-accent);
+    border: 2px solid white;
+    left: -20px;
+    top: 4px;
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+
+/* Skills rendering */
+.skill-badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-badge {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+}
+
+.skill-bar-item {
+    margin-bottom: 0.6rem;
+}
+
+.skill-bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.skill-bar-track {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    background: var(--cv-accent);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.8s ease-out;
+}
+
+/* Project Cards in Preview */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.cv-project-item {
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: #fafafa;
+}
+
+.cv-project-link {
+    color: var(--cv-accent);
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-top: 0.25rem;
+    display: inline-block;
+}
+
+.cv-project-link:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------
+   CV Template Style 1: Split Sidebar Layout
+   -------------------------------------------------- */
+.template-split-sidebar {
+    padding: 0 !important; /* Full width split */
+}
+
+.template-split-sidebar .cv-split-container {
+    display: flex;
+    min-height: 1130px;
+}
+
+/* Left Sidebar */
+.template-split-sidebar .cv-sidebar {
+    width: 32%;
+    padding: var(--page-padding) 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Sidebar Styles */
+.template-split-sidebar .sidebar-style-dark {
+    background-color: var(--cv-sidebar-dark-bg);
+    color: #e2e8f0;
+}
+
+.template-split-sidebar .sidebar-style-light {
+    background-color: var(--cv-sidebar-light-bg);
+    color: #334155;
+    border-right: 1px solid #e2e8f0;
+}
+
+.template-split-sidebar .sidebar-style-accent {
+    background: linear-gradient(180deg, var(--cv-accent) 0%, #0369a1 100%);
+    color: white;
+}
+
+.cv-avatar-container {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.25rem auto;
+    border: 4px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    background: #f1f5f9;
+    display: none; /* Controlled by toggle JS */
+}
+
+.cv-avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cv-sidebar-header {
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 1.25rem;
+}
+
+.sidebar-style-light .cv-sidebar-header {
+    border-bottom-color: #e2e8f0;
+}
+
+.cv-sidebar-header h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+    line-height: 1.2;
+}
+
+.sidebar-style-dark .cv-sidebar-header h1 { color: white; }
+.sidebar-style-light .cv-sidebar-header h1 { color: #0f172a; }
+.sidebar-style-accent .cv-sidebar-header h1 { color: white; }
+
+.cv-sidebar-header p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sidebar-style-dark .cv-sidebar-header p { color: var(--cv-accent); }
+.sidebar-style-light .cv-sidebar-header p { color: var(--cv-accent); }
+.sidebar-style-accent .cv-sidebar-header p { color: rgba(255,255,255,0.85); }
+
+.sidebar-sec-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.8rem;
+    border-bottom: 1.5px solid rgba(255,255,255,0.15);
+    padding-bottom: 0.2rem;
+}
+
+.sidebar-style-light .sidebar-sec-title {
+    border-bottom-color: #cbd5e1;
+    color: #0f172a;
+}
+
+.sidebar-style-dark .sidebar-sec-title {
+    color: white;
+}
+
+.sidebar-style-accent .sidebar-sec-title {
+    color: white;
+    border-bottom-color: rgba(255,255,255,0.3);
+}
+
+.cv-contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.cv-contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    word-break: break-all;
+}
+
+.cv-contact-list li i {
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
+}
+
+.sidebar-style-dark .cv-contact-list i { color: var(--cv-accent); }
+.sidebar-style-light .cv-contact-list i { color: var(--cv-accent); }
+.sidebar-style-accent .cv-contact-list i { color: white; }
+
+.cv-skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cv-languages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.cv-lang-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+/* Right Main Panel */
+.template-split-sidebar .cv-main-content {
+    width: 68%;
+    padding: var(--page-padding) 2rem;
+    background-color: var(--cv-bg-light);
+}
+
+
+/* --------------------------------------------------
+   CV Template Style 2: Modern Minimalist Layout
+   -------------------------------------------------- */
+.template-modern .cv-split-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.template-modern .cv-sidebar {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.template-modern .cv-avatar-container {
+    float: left;
+    margin: 0 1.5rem 0 0;
+    width: 100px;
+    height: 100px;
+}
+
+.template-modern .cv-sidebar-header {
+    text-align: left;
+    border-bottom: 2px solid var(--cv-accent);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.template-modern .cv-sidebar-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.template-modern .cv-sidebar-header p {
+    font-size: 1.1rem;
+    color: var(--cv-accent);
+    font-weight: 600;
+}
+
+.template-modern .cv-contact-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.template-modern .cv-contact-list li {
+    font-size: 0.85rem;
+}
+
+.template-modern .cv-contact-list i {
+    color: var(--cv-accent);
+}
+
+.template-modern .cv-sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.template-modern .cv-sidebar-section .sidebar-sec-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--cv-accent);
+    border-bottom: 2px solid var(--cv-accent);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.template-modern .cv-skills-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.template-modern .cv-skills-grid .skill-bar-item {
+    width: calc(50% - 0.5rem);
+}
+
+.template-modern .cv-languages-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.template-modern .cv-main-content {
+    width: 100%;
+}
+
+
+/* --------------------------------------------------
+   CV Template Style 3: Executive Classic Layout
+   -------------------------------------------------- */
+.template-executive .cv-split-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.template-executive .cv-sidebar-header {
+    text-align: center;
+    border-top: 5px solid var(--cv-accent);
+    background: #f8fafc;
+    padding: 1.5rem 1rem;
+    margin: calc(var(--page-padding) * -1) calc(var(--page-padding) * -1) 1.5rem calc(var(--page-padding) * -1);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.template-executive .cv-sidebar-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+}
+
+.template-executive .cv-sidebar-header p {
+    font-size: 1.05rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 0.25rem;
+}
+
+.template-executive .cv-contact-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    margin-top: 1rem;
+    border-top: 1px dashed #cbd5e1;
+    padding-top: 0.75rem;
+}
+
+.template-executive .cv-contact-list li {
+    font-size: 0.8rem;
+    color: #475569;
+}
+
+.template-executive .cv-contact-list i {
+    color: var(--cv-accent);
+}
+
+.template-executive .cv-avatar-container {
+    margin-bottom: 0.75rem;
+}
+
+.template-executive .cv-sidebar {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.template-executive .cv-sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.template-executive .cv-sidebar-section .sidebar-sec-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 2px solid var(--cv-accent);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.template-executive .cv-skills-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.template-executive .cv-skills-grid .skill-bar-item {
+    width: calc(33.3% - 0.5rem);
+}
+
+.template-executive .cv-languages-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.template-executive .cv-main-content {
+    width: 100%;
+}
+
+
+/* --------------------------------------------------
+   CV Template Style 4: Minimal Layout (No Icons)
+   -------------------------------------------------- */
+.template-minimal .cv-split-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.template-minimal .cv-avatar-container {
+    display: none !important; /* Never show avatar on minimal */
+}
+
+.template-minimal .cv-sidebar-header {
+    text-align: left;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1.5rem;
+}
+
+.template-minimal .cv-sidebar-header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #0f172a;
+    letter-spacing: -1px;
+}
+
+.template-minimal .cv-sidebar-header p {
+    font-size: 1rem;
+    color: #64748b;
+    font-weight: 400;
+}
+
+.template-minimal .cv-contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.template-minimal .cv-contact-list li {
+    font-size: 0.8rem;
+}
+
+.template-minimal .cv-contact-list i {
+    display: none; /* Hide icons */
+}
+
+.template-minimal .cv-sidebar {
+    width: 100%;
+}
+
+.template-minimal .cv-sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.template-minimal .cv-sidebar-section .sidebar-sec-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+}
+
+.template-minimal .cv-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+}
+
+.template-minimal .cv-skills-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.template-minimal .cv-skills-grid .skill-bar-item {
+    width: calc(33.3% - 0.4rem);
+}
+
+.template-minimal .skill-bar-track {
+    background: #f1f5f9;
+}
+
+.template-minimal .skill-bar-fill {
+    background: #475569;
+}
+
+.template-minimal .timeline-container {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.template-minimal .timeline-item::before {
+    display: none; /* Hide bullets */
+}
+
+.template-minimal .cv-project-item {
+    border: none;
+    padding: 0;
+    background: transparent;
+    margin-bottom: 0.75rem;
+}
+
+
+/* Footer styling */
+.app-footer {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(9, 13, 22, 0.9);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+
+/* --------------------------------------------------
+   Responsive Design Rules (Small Screens)
+   -------------------------------------------------- */
+
+@media (max-width: 1024px) {
+    .app-workspace {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    
+    .editor-panel {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        height: auto;
+        overflow: visible;
+    }
+    
+    .preview-panel {
+        width: 100%;
+        height: auto;
+        padding-bottom: 2rem;
+    }
+
+    .preview-viewport {
+        overflow-y: visible;
+        padding: 1rem;
+    }
+
+    .cv-page {
+        min-height: auto;
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .col-span-2 {
+        grid-column: span 1;
+    }
+
+    .tab-btn span {
+        display: none; /* Only show icons on narrow screens */
+    }
+
+    .tab-btn {
+        padding: 0.8rem 1rem;
+    }
+
+    .tab-content-container {
+        padding: 1.25rem;
+    }
+
+    .template-split-sidebar .cv-split-container {
+        flex-direction: column;
+    }
+
+    .template-split-sidebar .cv-sidebar {
+        width: 100% !important;
+    }
+
+    .template-split-sidebar .cv-main-content {
+        width: 100% !important;
+    }
+}
+
+
+/* --------------------------------------------------
+   PRINT STYLE SHEET (For downloading PDF)
+   -------------------------------------------------- */
+
+@media print {
+    /* Hide everything on the website dashboard */
+    body, html {
+        background: white !important;
+        color: black !important;
+        width: 100%;
+        height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .bg-shape,
+    .app-header,
+    .editor-panel,
+    .preview-controls,
+    .app-footer {
+        display: none !important;
+    }
+
+    .app-container,
+    .app-workspace,
+    .preview-panel,
+    .preview-viewport {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+    }
+
+    /* Format the CV canvas to fit exactly on A4 print */
+    .cv-page {
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: var(--page-padding) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 297mm !important; /* A4 size standard height */
+        background: white !important;
+        color: #1e293b !important;
+        page-break-after: avoid;
+        page-break-inside: auto;
+    }
+
+    /* Keep backgrounds visible when printing (e.g. sidebar color) */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .timeline-item {
+        page-break-inside: avoid;
+    }
+
+    .cv-section {
+        page-break-inside: avoid;
+    }
+}
